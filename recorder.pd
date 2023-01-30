@@ -1,0 +1,88 @@
+#N canvas 1078 233 568 689 10;
+#X obj 16 373 writesf~ 2;
+#X msg 41 144 stop;
+#X obj 160 125 bng 15 250 50 0 empty empty record 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 160 150 bng 15 250 50 0 empty empty stop 17 7 0 10 #fcfcfc #000000
+#000000;
+#X obj -7 279 inlet~;
+#X obj 88 279 inlet~;
+#N canvas 0 22 450 300 (subpatch) 0;
+#X array \$0-left 4410 float 2;
+#X coords 0 1 4410 -1 40 80 2 0 0;
+#X restore 121 122 graph;
+#X obj 236 240 metro 100;
+#X obj 281 73 samplerate~;
+#X obj 254 19 loadbang;
+#X obj 281 100 / 10;
+#X obj 281 127 pack f \$0;
+#N canvas 0 22 450 300 (subpatch) 0;
+#X array \$0-right 4410 float 2;
+#X coords 0 1 4410 -1 40 80 2 0 0;
+#X restore 221 125 graph;
+#X msg 281 154 \; \$2-left resize \$1 \; \$2-right resize \$1;
+#X obj -1 537 tabwrite~ \$0-left;
+#X obj 254 46 t b b;
+#X obj 18 -52 r identifier;
+#X obj 18 -27 symbol \$1;
+#X obj 29 18 r play;
+#X msg 29 43 start;
+#X obj 36 67 r stop;
+#X obj 124 222 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 277 300 delay 10000;
+#X msg 307 591 \; pd quit;
+#X msg 18 -4 open -bytes 4 -rate 44100 -wave /home/measures/waves/\$1.wav
+;
+#X listbox 277 346 20 0 0 0 - - - 0;
+#X obj 308 377 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 308 398 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000 0 1;
+#X obj 275 442 spigot;
+#X obj 258 380 t s s;
+#X obj 21 303 *~ 0.8;
+#X obj 97 306 *~ 0.8;
+#X obj 308 215 delay 5000;
+#X obj 308 239 s vst_close;
+#X obj 36 107 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000
+#000000;
+#X msg 340 484 /home/measures/wav2mp3.sh \$1;
+#X obj 52 248 print STOPPPPPPPP;
+#X obj 51 342 dac~;
+#X connect 1 0 0 0;
+#X connect 1 0 21 0;
+#X connect 1 0 36 0;
+#X connect 4 0 14 0;
+#X connect 4 0 30 0;
+#X connect 5 0 31 0;
+#X connect 7 0 14 0;
+#X connect 8 0 10 0;
+#X connect 9 0 15 0;
+#X connect 10 0 11 0;
+#X connect 11 0 13 0;
+#X connect 15 0 7 0;
+#X connect 15 1 8 0;
+#X connect 16 0 17 0;
+#X connect 17 0 24 0;
+#X connect 17 0 25 0;
+#X connect 18 0 19 0;
+#X connect 19 0 0 0;
+#X connect 20 0 34 0;
+#X connect 21 0 22 0;
+#X connect 21 0 32 0;
+#X connect 22 0 25 0;
+#X connect 22 0 23 0;
+#X connect 24 0 0 0;
+#X connect 25 0 29 0;
+#X connect 26 0 27 0;
+#X connect 27 0 28 1;
+#X connect 29 0 26 0;
+#X connect 29 1 28 0;
+#X connect 30 0 0 0;
+#X connect 30 0 37 0;
+#X connect 31 0 0 1;
+#X connect 31 0 37 1;
+#X connect 32 0 33 0;
+#X connect 34 0 1 0;
+#X coords 0 -1 1 1 171 115 2 100 100;

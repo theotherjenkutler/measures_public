@@ -1,0 +1,107 @@
+#N canvas 0 0 450 300 12;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array array1 7998 float 2;
+#X coords 0 0 7998 4095 200 140 1 0 0;
+#X restore 320 306 graph;
+#X obj 327 195 soundfiler;
+#X obj 15 815 shell;
+#X obj 327 110 r identifier;
+#X obj 696 142 s identifier;
+#X text 10 17 fileReader opens a txt file with data and then parses
+it into values between 0 and 127 for MIDI;
+#X text 7 50 the inverval between each reading should be 0.25 seconds
+or smaller;
+#X floatatom 52 224 5 0 0 0 - - - 0;
+#X obj 52 169 loadbang;
+#X obj 19 409 tabread array1;
+#X obj 19 303 metro;
+#X floatatom 52 276 5 0 0 0 - - - 0;
+#X obj 2 285 tgl 15 0 empty empty empty 17 7 0 10 #fcfcfc #000000 #000000
+0 1;
+#X obj 19 355 f;
+#X obj 61 356 + 1;
+#X msg 37 327 0;
+#X floatatom 19 382 5 0 0 0 - - - 0;
+#X floatatom 19 435 5 0 0 0 - - - 0;
+#X obj 19 502 outlet;
+#X obj 52 249 * 1000;
+#X text 106 250 to convert to ms;
+#X obj 2 239 r play;
+#X text 90 222 interval in sec;
+#X text 9 713 -send "msg..." -- send a message at startup \, after
+patches are loaded to make -send send to a receiver in a patch the
+-open message has to be used correctly. that is not just somepatch.pd
+or open somepatch.pd but -open somepatch.pd. eg -open somepatch.pd
+-send "somewhere 11";
+#X text 7 693 notes;
+#X text 8 588 when the patch is opened via bash script in the bash
+script write: use pd -open measures_01.pd -send "identifier \$1";
+#X text 7 636 the bash script should have one argument which is the
+unique identifier \, that is the full path of the mac address with
+date and time and .txt or whatever extension;
+#X obj 327 136 symbol \$1;
+#X text 693 89 for debugging;
+#X floatatom 327 219 5 0 0 0 - - - 0;
+#X msg 14 261 0;
+#X obj 68 302 sel;
+#X obj 327 245 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc
+#000000 #000000;
+#X obj 327 269 s play;
+#X obj 67 383 s stop;
+#X obj 394 219 print;
+#X obj 119 329 /;
+#X msg 119 298 1;
+#X obj 119 270 t b f;
+#X floatatom 119 356 5 0 0 0 - - - 0;
+#X text 143 299 baseline duration in sec;
+#X obj 139 503 outlet;
+#X obj 101 441 >;
+#X text 146 441 before the 4th sample the table is read to the left
+outlet;
+#X text 147 455 after the 4th sample the table is read to the right
+outlet;
+#X text 69 502 setup;
+#X text 191 505 audio;
+#X obj 19 466 demux 1;
+#X msg 52 198 0.04;
+#X msg 327 163 read -resize /home/measures/data/\$1_pd.txt array1;
+#X msg 696 114 1666131772_541241F6B870;
+#X connect 1 0 29 0;
+#X connect 1 1 35 0;
+#X connect 3 0 27 0;
+#X connect 7 0 19 0;
+#X connect 7 0 38 0;
+#X connect 8 0 48 0;
+#X connect 9 0 17 0;
+#X connect 10 0 13 0;
+#X connect 11 0 10 1;
+#X connect 12 0 10 0;
+#X connect 13 0 14 0;
+#X connect 13 0 16 0;
+#X connect 14 0 13 1;
+#X connect 15 0 13 1;
+#X connect 16 0 9 0;
+#X connect 16 0 31 0;
+#X connect 16 0 42 0;
+#X connect 17 0 47 0;
+#X connect 19 0 11 0;
+#X connect 21 0 12 0;
+#X connect 27 0 49 0;
+#X connect 29 0 31 1;
+#X connect 29 0 32 0;
+#X connect 30 0 12 0;
+#X connect 31 0 15 0;
+#X connect 31 0 30 0;
+#X connect 31 0 34 0;
+#X connect 32 0 33 0;
+#X connect 36 0 39 0;
+#X connect 37 0 36 0;
+#X connect 38 0 37 0;
+#X connect 38 1 36 1;
+#X connect 39 0 42 1;
+#X connect 42 0 47 1;
+#X connect 47 0 18 0;
+#X connect 47 1 41 0;
+#X connect 48 0 7 0;
+#X connect 49 0 1 0;
+#X connect 50 0 4 0;
